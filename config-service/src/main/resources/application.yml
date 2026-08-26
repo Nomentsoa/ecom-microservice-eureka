@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: config-service
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///Users/lazanomentsoarabesandratana/Pojects/JAVA/Springboot/RevisionTotal/ecom-microservice-eureka/config-service/src/main/resources/config
+    bus:
+      enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "shutdown"
