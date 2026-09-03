@@ -1,5 +1,6 @@
 package ca.lazanomentsoa.userservice.configController;
 
+import ca.lazanomentsoa.dto.product.ProductResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,9 @@ public class BuildInfoController {
 
 
     @GetMapping("/build-info")
-    public String getBuildInfo(){
-        return "Build Info in User-service: " + buildName;
+    public String getBuildInfo() {
+        ProductResponse productResponse = new ProductResponse();
+        return "Build Info in User-service: " + buildName + "\n" + productResponse.getName();
+
     }
 }

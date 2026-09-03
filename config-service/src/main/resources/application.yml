@@ -15,6 +15,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+  datasource:
+    url:
+
 
 server:
   port: 8888

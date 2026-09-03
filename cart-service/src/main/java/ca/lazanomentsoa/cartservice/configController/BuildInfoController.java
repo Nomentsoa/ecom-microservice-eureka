@@ -13,8 +13,11 @@ public class BuildInfoController {
     private String buildName;
 
 
+    @Value("${test.name}")
+    private String testName;
+
     @GetMapping("/build-info")
     public String getBuildInfo(){
-        return "Build Info in Cart-service: " + buildName;
+        return "Build Info in Cart-service: " + buildName +" test name: " + testName;
     }
 }
