@@ -9,6 +9,18 @@ spring:
     bus:
       enabled: true
 
+#logging:
+#  level:
+##    trace to show log trace and debug
+#    root: info
+#    ca.lazanomentsoa.userservice: trace
+#  file:
+#    name: logs/${spring.application.name}.log
+#  logback:
+#    rollingpolicy:
+#      max-file-size: 5MB
+#      max-history: 7
+
 
 server:
   port: 8084
