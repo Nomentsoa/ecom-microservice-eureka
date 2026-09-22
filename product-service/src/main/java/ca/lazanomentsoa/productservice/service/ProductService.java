@@ -8,7 +8,9 @@ import ca.lazanomentsoa.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,5 +25,9 @@ public class ProductService {
         return productRepository.findById(id)
                 .map(ProductMapper::toProductResponse);
 
+    }
+
+    public List<ProductResponse> getAllProductsResponse(){
+        return productRepository.findAll().stream().map(ProductMapper::toProductResponse).collect(Collectors.toList());
     }
 }
