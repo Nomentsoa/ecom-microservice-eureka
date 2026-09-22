@@ -13,8 +13,9 @@ public class GatewayConfig {
     public RouteLocator custumRouteLocator(RouteLocatorBuilder builder){
         return builder.routes()
                 .route("product-service", r -> r
-                        .path("/products/**")
-                        .filters(f -> f.rewritePath("/products(?<segment>/?.*)", "/api/products${segment}"))
+                        .path("/api/products/**")
+                        .filters(f -> f.circuitBreaker(config -> config.setName("ecomBreaker").setFallbackUri("forward:/fallback/products")))
+                        //.filters(f -> f.rewritePath("/products(?<segment>/?.*)", "/api/products${segment}"))
                         .uri("lb://PRODUCT-SERVICE")
                 )
                 .route( "user-service", r -> r
