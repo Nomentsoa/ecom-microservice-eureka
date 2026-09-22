@@ -33,3 +33,4 @@ resilience4j:
       retryBreaker:
         maxAttempts: 5
         waitDuration: 500ms
+

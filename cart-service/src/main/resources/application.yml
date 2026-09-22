@@ -12,3 +12,12 @@ spring:
 server:
   port: 8081
 
+resilience4j:
+  #rate limiter
+  ratelimiter:
+    instances:
+      rateLimiterBreaker:
+        timeout-duration: 0
+        limit-refresh-period: 4s
+        limit-for-period: 2
+
