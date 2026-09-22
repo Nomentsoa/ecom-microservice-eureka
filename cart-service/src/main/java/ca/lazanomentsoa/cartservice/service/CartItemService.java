@@ -8,6 +8,7 @@ import ca.lazanomentsoa.cartservice.repository.CartItemRepository;
 import ca.lazanomentsoa.dto.product.ProductResponse;
 import ca.lazanomentsoa.dto.user.UserResponse;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,13 @@ public class CartItemService {
     private final ProductHttpInterface productHttpInterface;
     private final UserHttpInterface userHttpInterface;
 
-    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
+    int attempts = 0;
+
+  //  @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
+    @Retry(name = "retryBreaker", fallbackMethod = "addToCartFallback")
     public String addToCart(String userId, CreateItemRequest createItemRequest){
+
+        System.out.println("Attempt #" + ++attempts );
 
         ProductResponse product = productHttpInterface.getProduct(createItemRequest.getProductId().toString());
 
