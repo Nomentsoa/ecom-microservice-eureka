@@ -7,6 +7,7 @@ import ca.lazanomentsoa.cartservice.model.CartItem;
 import ca.lazanomentsoa.cartservice.repository.CartItemRepository;
 import ca.lazanomentsoa.dto.product.ProductResponse;
 import ca.lazanomentsoa.dto.user.UserResponse;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class CartItemService {
     private final ProductHttpInterface productHttpInterface;
     private final UserHttpInterface userHttpInterface;
 
+    @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
     public String addToCart(String userId, CreateItemRequest createItemRequest){
 
         ProductResponse product = productHttpInterface.getProduct(createItemRequest.getProductId().toString());
@@ -51,5 +53,11 @@ public class CartItemService {
         }
 
         return "Cart item saved";
+    }
+
+    public String addToCartFallback(String userId, CreateItemRequest createItemRequest, Exception exception){
+        exception.printStackTrace();
+        System.out.println(exception + "Fallback called");
+        return "Fallback, one service is down";
     }
 }
