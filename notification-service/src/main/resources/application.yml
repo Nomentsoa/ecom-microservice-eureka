@@ -1,12 +1,15 @@
-build:
-  name: "Cart Dev Update"
-
 spring:
+  application:
+    name: notification-service
+
   rabbitmq:
     host: localhost
     port: 5672
     username: guest
     password: guest
+
+server:
+  port: 8085
 
 rabbitmq:
   exchange:
@@ -15,3 +18,5 @@ rabbitmq:
     name: cart.queue
   routing:
     key: cart.tracking
+
+
