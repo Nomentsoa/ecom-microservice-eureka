@@ -10,11 +10,18 @@ spring:
           search-locations: file:///Users/lazanomentsoarabesandratana/Pojects/JAVA/Springboot/RevisionTotal/ecom-microservice-eureka/config-service/src/main/resources/config
     bus:
       enabled: true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    addresses: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:guest}
+    connection-timeout: 30000
   datasource:
     url:
 
