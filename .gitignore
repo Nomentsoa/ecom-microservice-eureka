@@ -1,3 +1,4 @@
 logs
 cart-service/.env
 notification-service/.env
+config-service/.env
