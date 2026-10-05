@@ -16,6 +16,16 @@ spring:
     virtual-host: ${RABBITMQ_VHOST:guest}
     connection-timeout: 30000
 
+  cloud:
+    function:
+      definition: cartCreated
+    stream:
+      bindings:
+        cartCreated-in-0:
+          destination: cart.exchange
+          group: notification-group
+          content-type: application/json
+
 server:
   port: 8085
 
