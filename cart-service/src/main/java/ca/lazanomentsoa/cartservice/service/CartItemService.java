@@ -11,6 +11,7 @@ import ca.lazanomentsoa.dto.user.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,11 +26,14 @@ public class CartItemService {
     private final ProductHttpInterface productHttpInterface;
     private final UserHttpInterface userHttpInterface;
 
-    private final RabbitTemplate rabbitTemplate;
-    @Value("${rabbitmq.exchange.name}")
-    private String exchangeName;
-    @Value("${rabbitmq.routing.key}")
-    private String routingKey;
+    //streamBridge to manually send messages to rabbitMQ or Kafka
+    private final StreamBridge streamBridge;
+
+//    private final RabbitTemplate rabbitTemplate;
+//    @Value("${rabbitmq.exchange.name}")
+//    private String exchangeName;
+//    @Value("${rabbitmq.routing.key}")
+//    private String routingKey;
 
     public String addToCart(String userId, CreateItemRequest createItemRequest) {
 
@@ -82,7 +86,8 @@ public class CartItemService {
 //                Map.of("cartId", cartItem.getId(), "status", "CREATED"));
 
         //send the event
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, cartCreatedEvent);
+//        rabbitTemplate.convertAndSend(exchangeName, routingKey, cartCreatedEvent);
+        streamBridge.send("addToCart-out-0", cartCreatedEvent);
 
         return "Cart item saved";
     }
