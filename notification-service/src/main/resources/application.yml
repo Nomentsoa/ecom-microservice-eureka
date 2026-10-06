@@ -22,7 +22,7 @@ spring:
     stream:
       bindings:
         cartCreated-in-0:
-          destination: cart.exchange
+          destination: cart.exchange.new
           group: notification-group
           content-type: application/json
 

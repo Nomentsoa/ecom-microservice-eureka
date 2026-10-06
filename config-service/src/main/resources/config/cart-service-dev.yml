@@ -22,13 +22,13 @@ spring:
     stream:
       bindings:
         addToCart-out-0:
-          destination: cart.exchange
+          destination: cart.exchange.new
           content-type: application/json
       rabbit:
         bindings:
           addToCart-out-0:
             producer:
-              routing-key-expression: '''cart.tracking'''
+              routing-key-expression: '''cart.tracking.new'''
 
 
 rabbitmq:

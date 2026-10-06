@@ -1,3 +1,4 @@
+/*
 package ca.lazanomentsoa.notificationservice.config;
 
 
@@ -59,3 +60,4 @@ public class RabbitMQConfiguration {
     }
 
 }
+*/

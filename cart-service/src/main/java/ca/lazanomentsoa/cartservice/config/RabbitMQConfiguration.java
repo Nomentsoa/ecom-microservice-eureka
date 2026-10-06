@@ -1,3 +1,4 @@
+/*
 package ca.lazanomentsoa.cartservice.config;
 
 
@@ -67,3 +68,4 @@ public class RabbitMQConfiguration {
     }
 
 }
+*/
