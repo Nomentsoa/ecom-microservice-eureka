@@ -1,2 +1,11 @@
 build:
   name: "User Dev update"
+
+#KEYCLOAK
+keycloak:
+  admin:
+    username: admin_laza
+    password: ${KEYCLOAK_ADMIN_PASSWORD:test}
+    server-url: http://localhost:8443
+    realm: ecom-app
+    client-id: oauth2-pkce

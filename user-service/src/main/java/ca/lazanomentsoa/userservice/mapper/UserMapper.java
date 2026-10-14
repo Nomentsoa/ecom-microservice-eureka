@@ -7,8 +7,9 @@ import ca.lazanomentsoa.userservice.model.Address;
 import ca.lazanomentsoa.userservice.model.User;
 
 public class UserMapper {
-    public static User mapToUser(UserRequest userRequest){
+    public static User mapToUser(UserRequest userRequest, String userId) {
         User user = new User();
+        user.setKeycloakId(userId);
         user.setFirstName(userRequest.getFirstName());
         user.setLastName(userRequest.getLastName());
         user.setEmail(userRequest.getEmail());

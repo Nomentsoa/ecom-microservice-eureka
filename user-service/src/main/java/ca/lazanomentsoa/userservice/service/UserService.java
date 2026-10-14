@@ -13,9 +13,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final KeyCloakAdminService keyCloakAdminService;
 
     public void createUser(UserRequest userRequest) {
-        userRepository.save(UserMapper.mapToUser(userRequest));
+        String token = keyCloakAdminService.getAdminAccessToken();
+        String keycloakdUserId = keyCloakAdminService.createUser(token, userRequest);
+
+
+        userRepository.save(UserMapper.mapToUser(userRequest, keycloakdUserId));
     }
 
     public Optional<UserResponse> findUserById(Long id){
