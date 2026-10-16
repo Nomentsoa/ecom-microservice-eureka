@@ -5,7 +5,8 @@ build:
 keycloak:
   admin:
     username: admin_laza
-    password: ${KEYCLOAK_ADMIN_PASSWORD:test}
+    password: ${KEYCLOAK_ADMIN_PASSWORD:Laza123}
     server-url: http://localhost:8443
     realm: ecom-app
     client-id: oauth2-pkce
+    client-uid: 6db64978-3f7f-4ee6-bddc-ad8cb101b889
